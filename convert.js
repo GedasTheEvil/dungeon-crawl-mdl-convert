@@ -1,7 +1,7 @@
 /*jslint browser: false */
 /*global require */
 
-var modelName = 'worm.mdl',
+var modelName = 'tchest.mdl',
     readerBase = require('./lib/MdlDataNormalization.js'),
     writerBase = require('./lib/MdlBinaryWriter.js'),
     data = new readerBase(['in', modelName].join('/'));
