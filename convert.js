@@ -24,11 +24,18 @@ if (mode === 'toBin') {
     data = (new readerBase(source)).getNormalized();
 }
 
-if (mode === 'toJson') {
+if (mode === 'binToJson') {
     readerBase = require('./lib/MdlBinaryReader.js');
     data = (new readerBase(source)).getData();
     writerBase = require('./lib/JsonDataWriter.js');
     extension = '.json';
+}
+
+if (mode === 'binToMdl') {
+    readerBase = require('./lib/MdlBinaryReader.js');
+    data = (new readerBase(source)).getData();
+    writerBase = require('./lib/MdlPlainWriter.js');
+    extension = '.mdl';
 }
 
 new writerBase(data, ['out/', modelName, extension].join(''));
