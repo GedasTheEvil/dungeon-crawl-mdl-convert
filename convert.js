@@ -14,16 +14,21 @@ var modelName = argsGet('tchest.mdl'),
     mode = argsGet('toBin'),
     readerBase,
     writerBase,
-    data;
+    data,
+    extension = '.bin',
+    source = ['in', modelName].join('/');
 
 if (mode === 'toBin') {
     readerBase = require('./lib/MdlDataNormalization.js');
     writerBase = require('./lib/MdlBinaryWriter.js');
-    data = new readerBase(['in', modelName].join('/'));
-
-    new writerBase(data.getNormalized(), ['out/', modelName, '.bin'].join(''));
+    data = (new readerBase(source)).getNormalized();
 }
 
 if (mode === 'toJson') {
-
+    readerBase = require('./lib/MdlBinaryReader.js');
+    data = (new readerBase(source)).getData();
+    writerBase = require('./lib/JsonDataWriter.js');
+    extension = '.json';
 }
+
+new writerBase(data, ['out/', modelName, extension].join(''));
